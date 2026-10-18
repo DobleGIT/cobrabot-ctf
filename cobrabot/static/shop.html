@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CobraBot · Servicios de recobro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="/home/static/css/style.css?v=4" />
+  <link rel="stylesheet" href="/home/static/css/shop.css?v=4" />
+</head>
+<body>
+  <div class="dev-banner">Web en desarrollo · la plataforma puede cambiar sin previo aviso</div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="/home">
+        <span class="mark">CB</span>
+        <span class="name">CobraBot</span>
+        <span class="sub">Servicios de recobro</span>
+      </a>
+      <div class="auth-state" id="auth-state">
+        <span id="auth-text">No has iniciado sesión</span>
+        <button id="auth-btn" class="secondary" type="button">Entrar / Registrarse</button>
+        <button id="logout-btn" class="secondary" type="button" style="display:none">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Catálogo de servicios</span>
+        <h1>Recupera lo que <mark>te deben</mark>.</h1>
+        <p class="shop-tagline">Sin dramas (bueno, los justos). Tú eliges el servicio, nosotros nos ponemos pesados por ti.</p>
+      </div>
+      <span class="sticker" aria-hidden="true">¡Ese Bizum<br>no se paga<br>solo!</span>
+      <ol class="steps">
+        <li><span class="n">01</span><span>Elige tu arma de recobro favorita.</span></li>
+        <li><span class="n">02</span><span>Aplica tu código de descuento.</span></li>
+        <li><span class="n">03</span><span>Contrata y siéntate a esperar el Bizum.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <main class="wrap shop-layout">
+    <section class="catalog">
+      <div class="catalog-head">
+        <h2>Elige tu servicio</h2>
+        <div class="filters" id="filters" role="tablist" aria-label="Filtrar por categoría"></div>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+
+    <aside class="cart-panel">
+      <div class="cart-head">
+        <h2>Tu pedido</h2>
+        <span class="cart-count" id="cart-count">0</span>
+      </div>
+      <div id="cart-items"><div class="cart-empty">Aún no has añadido servicios.</div></div>
+
+      <label for="discount-code" class="discount-label">Código de descuento</label>
+      <div class="discount-row">
+        <input type="text" id="discount-code" placeholder="Introduce tu código" />
+        <button type="button" id="apply-discount">Aplicar</button>
+      </div>
+      <div class="discount-note" id="discount-note"></div>
+
+      <div class="totals">
+        <div class="row"><span>Subtotal</span><span id="t-subtotal">0,00 €</span></div>
+        <div class="row"><span>Descuento (<span id="t-pct">0</span>%)</span><span id="t-disc">-0,00 €</span></div>
+        <div class="row total"><span>Total</span><span id="t-total">0,00 €</span></div>
+      </div>
+
+      <button class="checkout-btn" id="checkout-btn" type="button" disabled>Contratar servicios</button>
+      <p class="cart-fine">IVA incluido · Sin permanencia · Con mucho cariño</p>
+
+      <div class="order-result" id="order-result" style="display:none"></div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 CobraBot · Servicios de recobro</span>
+      <span>Plataforma ficticia creada para un CTF. Ninguno de estos servicios existe.</span>
+    </div>
+  </footer>
+
+  <!-- Modal de login / registro (obligatorio para entrar en la tienda) -->
+  <div class="modal-backdrop" id="auth-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-top">
+        <span class="wordmark"><span class="mark">CB</span><span class="name">CobraBot</span></span>
+      </div>
+      <h2 class="modal-title" id="modal-title">¡Hola! 👋</h2>
+      <div class="modal-intro" id="modal-intro">Crea tu cuenta para entrar en CobraBot.</div>
+      <div class="tabs">
+        <button type="button" id="tab-register" class="active">Registrarse</button>
+        <button type="button" id="tab-login">Ya tengo cuenta</button>
+      </div>
+
+      <form id="auth-form" autocomplete="off">
+        <label for="m-user">Usuario</label>
+        <input type="text" id="m-user" required />
+
+        <div id="email-field">
+          <label for="m-email">Email</label>
+          <input type="text" id="m-email" />
+        </div>
+
+        <label for="m-pass">Contraseña</label>
+        <input type="password" id="m-pass" required />
+
+        <button type="submit" class="primary" id="auth-submit">Crear cuenta</button>
+      </form>
+      <div id="auth-msg" class="msg error"></div>
+      <div id="auth-close-row" style="margin-top:12px;text-align:right;display:none">
+        <button type="button" class="secondary" id="auth-close">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de bienvenida con el código de regalo -->
+  <div class="modal-backdrop" id="welcome-modal">
+    <div class="modal welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+      <span class="eyebrow">Cuenta creada ✓</span>
+      <h2 class="welcome-title" id="welcome-title">¡Bienvenido a CobraBot! 🎉</h2>
+      <p class="welcome-sub">Como nuevo cliente, tienes un código de descuento para tu primer pedido:</p>
+      <div class="coupon">
+        <div class="welcome-code" id="welcome-code">CODIGO</div>
+        <p class="welcome-pct" id="welcome-pct">-10% en tu primera compra</p>
+      </div>
+      <button type="button" class="primary" id="welcome-start">¡A cobrar!</button>
+    </div>
+  </div>
+
+  <!-- Modal de pedido gratis (reto superado) -->
+  <div class="modal-backdrop win-backdrop" id="win-modal">
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+    <div class="modal win-card" role="dialog" aria-modal="true" aria-labelledby="win-title">
+      <span class="stamp" aria-hidden="true">PAGADO<br><small>0,00 €</small></span>
+      <span class="eyebrow">Pedido <span id="win-order">#0000</span></span>
+      <h2 class="win-title" id="win-title">¡Te lo has llevado gratis! 🎉</h2>
+      <p class="win-sub">Algo no cuadra en la caja… pero el cobrador ya va de camino. 🚪</p>
+
+      <div class="receipt">
+        <div class="r-head">CobraBot · Ticket de compra</div>
+        <div id="win-lines"></div>
+        <div class="r-line r-muted"><span>Subtotal</span><span id="win-subtotal">0,00 €</span></div>
+        <div class="r-line r-muted"><span>Descuento</span><span id="win-disc">-0%</span></div>
+        <div class="r-line r-total"><span>Total</span><span id="win-total">0,00 €</span></div>
+      </div>
+
+      <div class="win-flag-label">Tu flag</div>
+      <div class="win-flag-row">
+        <code class="win-flag" id="win-flag">flag{...}</code>
+        <button type="button" id="win-copy">Copiar</button>
+      </div>
+
+      <button type="button" class="primary" id="win-close">¡Toma ya!</button>
+    </div>
+  </div>
+
+  <script src="/home/static/js/shop.js?v=4"></script>
+</body>
+</html>

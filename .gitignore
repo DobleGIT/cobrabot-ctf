@@ -1,0 +1,31 @@
+# Entorno / secretos
+.env
+**/.env
+!**/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Datos y logs en runtime
+**/data/
+**/logs/
+*.jsonl
+*.db
+
+# Backups y temporales
+*.bak
+*.bak.*
+*~
+
+# Caddy
+caddy_data/
+caddy_config/
+
+# SO / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

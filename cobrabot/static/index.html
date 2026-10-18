@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CobraBot · Acceso interno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="/admin/static/css/style.css?v=4" />
+  {{TURNSTILE_HEAD}}
+</head>
+<body>
+  <div class="dev-banner">Web en desarrollo · la plataforma puede cambiar sin previo aviso</div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <span class="wordmark">
+        <span class="mark">CB</span>
+        <span class="name">CobraBot</span>
+        <span class="sub">Administración</span>
+      </span>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="auth-shell">
+      <aside class="auth-side">
+        <span class="eyebrow">🔒 Área restringida</span>
+        <h2>El cuartel general de los cobradores</h2>
+        <p>Solo para el equipo de CobraBot. Si no trabajas aquí, el café de la oficina tampoco es para ti.</p>
+        <ul>
+          <li><span>Horario de soporte</span><span>L–V · 9:00–18:00</span></li>
+        </ul>
+      </aside>
+
+      <section class="auth-main">
+        <h1>Iniciar sesión</h1>
+        <p class="lead">Introduce tus credenciales de empleado.</p>
+
+        <form id="login-form" autocomplete="off">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" name="username" autocomplete="username" required />
+
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required />
+
+          {{TURNSTILE_WIDGET}}
+
+          <button type="submit" class="primary">Entrar</button>
+        </form>
+
+        <div id="msg" class="msg"></div>
+        <div id="flag-box" class="flag-box" style="display:none"></div>
+
+        <div class="auth-help">
+          ¿Problemas para acceder? Escribe a <a href="/admin/chat">soporte</a>.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 CobraBot</span>
+      <span>Plataforma ficticia creada para un CTF.</span>
+    </div>
+  </footer>
+
+  <a href="/admin/chat" class="chat-fab" aria-label="Hablar con soporte">
+    <span class="fab-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>
+    </span>
+    <span class="fab-label">Soporte</span>
+  </a>
+
+  <script src="/admin/static/js/login.js?v=4"></script>
+</body>
+</html>

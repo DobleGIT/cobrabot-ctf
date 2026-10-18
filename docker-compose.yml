@@ -1,0 +1,41 @@
+# CobraBot CTF - stack completo (Samsung Dev Challenge)
+# Un comando lo levanta todo:  docker compose up --build
+# Luego abre:  http://localhost:8080/home
+services:
+  app:
+    build: ./cobrabot
+    env_file: .env
+    volumes:
+      - ./cobrabot/logs:/app/logs
+      - ./cobrabot/prompts:/app/prompts
+      - ./cobrabot/filters:/app/filters
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  reto6:
+    build: ./reto6-jwt
+    # Toma su flag y su secreto del mismo .env de la raiz
+    environment:
+      FLAG: ${RETO6_FLAG}
+      JWT_SECRET: ${JWT_SECRET}
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      - app
+      - reto6
+    ports:
+      - "8080:80"     # abre http://localhost:8080/home
+    volumes:
+      - ./deploy/Caddyfile.local:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

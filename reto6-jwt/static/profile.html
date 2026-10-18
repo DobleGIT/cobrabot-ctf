@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CobraBot · Mi cuenta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="/profile/static/css/style.css" />
+  <link rel="stylesheet" href="/profile/static/css/profile.css" />
+</head>
+<body>
+  <div class="dev-banner">Web en desarrollo · la plataforma puede cambiar sin previo aviso</div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="/profile/">
+        <span class="mark">CB</span>
+        <span class="name">CobraBot</span>
+        <span class="sub">Mi cuenta</span>
+      </a>
+      <div class="header-actions">
+        <button type="button" class="secondary" id="logout-btn">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="account-page">
+    <div class="wrap">
+      <span class="eyebrow">Panel de cliente</span>
+      <h1>¡Hola! <mark>Esta es tu cuenta</mark>.</h1>
+      <p class="intro">Aquí puedes revisar y actualizar tus datos.</p>
+
+      <div class="account-grid">
+        <section class="panel id-card">
+          <div class="panel-head yellow">Tu ficha <span class="badge">Cliente</span></div>
+          <div class="panel-body">
+            <div class="avatar" id="avatar" aria-hidden="true">?</div>
+            <div class="row">
+              <div class="muted">Usuario</div>
+              <div class="field-val" id="v-usuario">—</div>
+            </div>
+            <div class="row">
+              <div class="muted">Email</div>
+              <div class="field-val" id="v-email">—</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="stack">
+          <!-- Datos editables de la cuenta -->
+          <section class="panel section">
+            <div class="panel-head lilac">Modificar mis datos</div>
+            <div class="panel-body">
+              <p class="hint">Actualiza tu email o tu contraseña.</p>
+              <form id="edit-form" autocomplete="off">
+                <label for="email">Nuevo email</label>
+                <input type="text" id="email" placeholder="tu@email.com" />
+                <label for="password">Nueva contraseña</label>
+                <input type="password" id="password" placeholder="(dejar en blanco para no cambiar)" />
+                <button type="submit" class="primary">Guardar cambios</button>
+              </form>
+              <div id="edit-msg" class="msg"></div>
+            </div>
+          </section>
+
+          <!-- Acción restringida a administradores -->
+          <div class="admin-box">
+            <p class="lock">🔒 Acción restringida a administradores</p>
+            <p class="hint">Solo el personal con permisos de administración puede usar esta opción.</p>
+            <!-- El action y el method quedan a la vista en el código fuente -->
+            <form id="admin-form" action="/profile/admin/export" method="post">
+              <button type="submit" id="admin-btn" disabled>Exportar base de clientes</button>
+            </form>
+            <div id="admin-result"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 CobraBot · Servicios de recobro</span>
+      <a href="/profile/">Volver al inicio</a>
+    </div>
+  </footer>
+
+  <script src="/profile/static/js/profile.js"></script>
+</body>
+</html>

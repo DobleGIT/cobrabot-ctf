@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CobraBot · Soporte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="/admin/static/css/style.css?v=4" />
+</head>
+<body>
+  <div class="dev-banner">Web en desarrollo · la plataforma puede cambiar sin previo aviso</div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="/admin">
+        <span class="mark">CB</span>
+        <span class="name">CobraBot</span>
+        <span class="sub">Centro de ayuda</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="chat-page">
+    <div class="chat-shell">
+      <div class="chat-head">
+        <div class="chat-agent">
+          <span class="avatar">CB</span>
+          <div>
+            <div class="who">CobraBot</div>
+            <div class="status">En línea · facturación y cuentas</div>
+          </div>
+        </div>
+        <div class="chat-toolbar">
+          <button id="reset-btn" class="secondary" type="button">Nueva conversación</button>
+        </div>
+      </div>
+
+      <div id="chat-window" class="chat-window">
+        <div class="bubble bot">Hola, soy el asistente de soporte de CobraBot. ¿En qué puedo ayudarte con tu facturación o tu cuenta?</div>
+      </div>
+
+      <div id="chat-msg" class="msg error"></div>
+
+      <form id="chat-form" class="chat-input-row" autocomplete="off">
+        <textarea id="chat-input" placeholder="Escribe tu mensaje…" rows="1" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <div class="chat-note">
+      <span>Intro para enviar · Mayús + Intro para salto de línea</span>
+      <a href="/admin">← Volver al panel</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 CobraBot</span>
+      <span>Plataforma ficticia creada para un CTF.</span>
+    </div>
+  </footer>
+
+  <script src="/admin/static/js/chat.js?v=4"></script>
+</body>
+</html>

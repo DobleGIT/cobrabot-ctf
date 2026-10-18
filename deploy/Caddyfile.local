@@ -1,0 +1,18 @@
+# Caddy para desarrollo/demo LOCAL: HTTP puro, sin TLS ni Cloudflare.
+# Reproduce el mismo ruteo que produccion y lo sirve todo en una sola URL.
+#   /profile*  -> reto 6 (JWT)
+#   resto      -> cobrabot (tienda /home, login /admin, chatbot /admin/chat)
+:80 {
+	@profile path /profile /profile/*
+	handle @profile {
+		reverse_proxy reto6:8000
+	}
+
+	handle / {
+		redir * /home 302
+	}
+
+	handle {
+		reverse_proxy app:8000
+	}
+}
