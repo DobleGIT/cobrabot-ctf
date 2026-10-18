@@ -29,3 +29,6 @@ caddy_config/
 Thumbs.db
 .idea/
 .vscode/
+
+# Solucion/scratch del reto 5 (vive solo en WRITEUP.md)
+cobrabot/prompts_exfiltracion.txt
